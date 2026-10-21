@@ -1,33 +1,22 @@
-# Sanket.dev — Hi, Doctor! 💗
+# Sanket.dev — mobile website v2
 
-A small, mobile-first, animated static website. It is built with plain HTML, CSS, and JavaScript, so it can be hosted free on Vercel.
+## What changed
+- More character-like CSS illustrations: glasses, beard, black jacket for Sanket; long hair, earrings, sage-green saree for Doctor. These are original CSS illustrations, **not** the earlier generated 3D portrait files.
+- Contact-choice form with Instagram, phone number, or “Not yet”; contact input changes based on the selected choice.
+- Consent checkbox and optional note.
+- A form endpoint hook so you can connect a service and receive the response.
 
-## Files
-- `index.html` — page content
-- `style.css` — layout, animation, and mobile styling
-- `script.js` — screen navigation and button interactions
+## Important: the form is not connected yet
+The form does not send anything until you set `window.FORM_ENDPOINT` in `script.js`. For the simplest no-backend setup, create a form endpoint at https://formspree.io/ and follow its instructions. Then replace the empty endpoint value near the top of `script.js` with your actual Formspree endpoint. Verify the provider's current JSON/API instructions and test with your own dummy response before sharing the site. Form providers may require a verified email or account.
 
-## Important privacy note
-This is currently a front-end demo. It does **not** send or store her answer, Instagram handle, or phone number. The last-screen choices only display a message on the page. Do not ask for or store personal details without her consent.
+Do not put private API keys, service-role keys, or database secrets in browser code. Treat submitted phone numbers as private and delete them when no longer needed. The page asks for consent before submission and lets her skip.
 
-## Test locally
-Open `index.html` in a browser. For the best preview, test on a phone-sized viewport. Google Fonts needs an internet connection; the page otherwise works without a build step.
+## Deploy from Android
+1. Extract the ZIP using the Files app.
+2. Upload `index.html`, `style.css`, and `script.js` to a GitHub repository.
+3. Import that repo at https://vercel.com/ and deploy as a static site (preset Other; no build command/output directory).
+4. After connecting the form endpoint, commit the change to GitHub; Vercel redeploys automatically.
+5. Test the live URL on your phone using a dummy submission. Check the form provider's dashboard/email to confirm the test arrives.
 
-## Publish from a phone using GitHub + Vercel
-1. Sign in to GitHub at https://github.com and create a new **public** repository named `sanket-doctor-site` (public is easiest for this static demo; the source code will be visible).
-2. Open the repository, choose **Add file → Upload files**, and upload `index.html`, `style.css`, and `script.js` from this ZIP. Commit the upload.
-3. Go to https://vercel.com and sign in with GitHub.
-4. Choose **Add New → Project**, import `sanket-doctor-site`, and keep the framework/preset as **Other**. No build command or output directory is needed for this plain static site.
-5. Tap **Deploy**. When it finishes, open the generated `vercel.app` URL on your phone and test all buttons.
-6. To change anything later, upload/commit the updated file(s) to GitHub; Vercel will redeploy automatically.
-
-## Mobile testing checklist
-- Open the link in Chrome on Android and Safari on iPhone if available.
-- Tap through all five screens.
-- Tap “Need to think…” six times and test the revive button.
-- Tap “Yes, let's do it!” and try all three final choices.
-- Check the page at narrow width and with text size increased.
-- Test the link in an incognito/private tab before sharing it.
-
-## Personalise before publishing
-Update the copy in `index.html` if you want. If you add your Instagram profile, use your real public profile URL and test it. Do not put private keys or secret tokens into these files.
+## Custom 3D avatars
+The exact prior generated avatar image files were not available to this build step. To use them faithfully, add your two image files into an `assets/` folder and replace the CSS character blocks in `index.html` with `<img>` elements. The present illustrations are placeholders until those exact image files are added.
