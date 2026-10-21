@@ -1,68 +1,13 @@
-const screens = [...document.querySelectorAll('.screen')];
-const progress = document.getElementById('progress');
-let thinkCount = 0;
-
-function showScreen(id) {
-  screens.forEach((screen, index) => {
-    const active = screen.id === id;
-    screen.classList.toggle('active', active);
-    screen.setAttribute('aria-hidden', String(!active));
-    if (active) progress.textContent = `${String(index + 1).padStart(2, '0')} / ${String(screens.length).padStart(2, '0')}`;
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-document.querySelectorAll('[data-next]').forEach(button => {
-  button.addEventListener('click', () => showScreen(button.dataset.next));
-});
-
-const reactions = [
-  'Why the thinking face? 🥺 Did the fries not excite you? 🍟💕',
-  'Are you sure? 👀 I was already mentally ordering biryani… 😂',
-  'Hmm… still thinking? 🤔 Should I improve my presentation? 😎',
-  'Okay okay, take your time… ⏳ But fries get cold, you know? 🍟😂',
-  'Five times?! 😳 You’re making me nervous now… 💗 Last chance? 🥺'
-];
-const thinkBtn = document.getElementById('thinkBtn');
-const reaction = document.getElementById('reaction');
-const dramaticScene = document.getElementById('dramaticScene');
-
-thinkBtn.addEventListener('click', () => {
-  thinkCount += 1;
-  if (thinkCount < 6) {
-    reaction.hidden = false;
-    reaction.textContent = reactions[thinkCount - 1];
-    thinkBtn.textContent = `Still thinking… (${thinkCount}/6) 🤔`;
-    if (thinkCount === 5) thinkBtn.textContent = 'One more click… 😳';
-  } else {
-    reaction.hidden = true;
-    dramaticScene.hidden = false;
-    thinkBtn.hidden = true;
-  }
-});
-
-document.getElementById('reviveBtn').addEventListener('click', () => {
-  thinkCount = 0;
-  dramaticScene.hidden = true;
-  thinkBtn.hidden = false;
-  thinkBtn.textContent = 'Need to think… 🤔';
-  reaction.hidden = false;
-  reaction.textContent = 'He has been revived. 🩹 The biryani plan is back on the table… maybe? 😌';
-});
-
-document.getElementById('yesBtn').addEventListener('click', () => showScreen('connect'));
-
-const sharePanel = document.getElementById('sharePanel');
-const shareMessage = document.getElementById('shareMessage');
-function showShareMessage(message) {
-  sharePanel.hidden = false;
-  shareMessage.textContent = message;
-}
-document.getElementById('instaBtn').addEventListener('click', () => {
-  showShareMessage('Instagram sounds good! 📸 You can ask Sanket for his handle—or share yours only if you feel comfortable. 💗');
-});
-document.getElementById('phoneBtn').addEventListener('click', () => {
-  showShareMessage('Phone number it is, if you feel comfortable! 📞 You can share it directly with Sanket. This page does not collect or send your number.');
-});
-document.getElementById('laterBtn').addEventListener('click', () => {
-  showShareMessage('Of course. 😊 No rush, no pressure. Thanks for checking out my little website, Doctor. Hope it made you smile. 🌷');
-});
+const screens=[...document.querySelectorAll('.screen')];const progress=document.getElementById('progress');let thinkCount=0;
+function showScreen(id){screens.forEach((s,i)=>{const active=s.id===id;s.classList.toggle('active',active);s.setAttribute('aria-hidden',String(!active));if(active)progress.textContent=`${String(i+1).padStart(2,'0')} / ${String(screens.length).padStart(2,'0')}`});window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.next)));
+const reactions=['Why the thinking face? 🥺 Did the fries not excite you? 🍟💕','Are you sure? 👀 I was already mentally ordering biryani… 😂','Hmm… still thinking? 🤔 Should I improve my presentation? 😎','Okay okay, take your time… ⏳ But fries get cold, you know? 🍟😂','Five times?! 😳 You’re making me nervous now… 💗 Last chance? 🥺'];
+const thinkBtn=document.getElementById('thinkBtn'),reaction=document.getElementById('reaction'),dramatic=document.getElementById('dramatic');
+thinkBtn.addEventListener('click',()=>{thinkCount++;if(thinkCount<6){reaction.hidden=false;reaction.textContent=reactions[thinkCount-1];thinkBtn.textContent=thinkCount===5?'One more click… 😳':`Still thinking… (${thinkCount}/6) 🤔`;}else{reaction.hidden=true;dramatic.hidden=false;thinkBtn.hidden=true;}});
+document.getElementById('reviveBtn').addEventListener('click',()=>{thinkCount=0;dramatic.hidden=true;thinkBtn.hidden=false;thinkBtn.textContent='Need to think… 🤔';reaction.hidden=false;reaction.textContent='He has been revived. 🩹 The biryani plan is back on the table… maybe? 😌';});
+document.getElementById('yesBtn').addEventListener('click',()=>showScreen('connect'));
+const form=document.getElementById('answerForm'),choiceInputs=[...document.querySelectorAll('input[name="contactChoice"]')],contactLabel=document.getElementById('contactLabel'),contactValue=document.getElementById('contactValue'),formStatus=document.getElementById('formStatus');
+function updateContactField(){const selected=choiceInputs.find(i=>i.checked).value;if(selected==='Instagram'){contactLabel.textContent='Instagram handle (optional)';contactValue.placeholder='@yourhandle';contactValue.type='text';contactValue.autocomplete='off';}else if(selected==='Phone number'){contactLabel.textContent='Phone number (optional)';contactValue.placeholder='+91 98765 43210';contactValue.type='tel';contactValue.autocomplete='tel';}else{contactLabel.textContent='Contact details (optional)';contactValue.placeholder='You can leave this blank';contactValue.type='text';contactValue.autocomplete='off';}}
+choiceInputs.forEach(i=>i.addEventListener('change',updateContactField));
+form.addEventListener('submit',async e=>{e.preventDefault();const endpoint=window.FORM_ENDPOINT||'';if(!endpoint||endpoint.includes('YOUR_FORM_ID')){formStatus.textContent='Not connected yet: set up your private form endpoint in script.js before publishing. No answer has been sent.';formStatus.style.color='#b04461';return;}const data=Object.fromEntries(new FormData(form).entries());const payload={...data,submittedAt:new Date().toISOString(),source:'Sanket.dev'};const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='Sending… 💌';try{const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});if(!response.ok)throw new Error('submit failed');formStatus.textContent='Answer sent. Thank you for sharing! 💗';formStatus.style.color='#34764a';form.reset();updateContactField();}catch(err){formStatus.textContent='Sorry, that did not send. Please try again or tell Sanket directly. No details were confirmed as submitted.';formStatus.style.color='#b04461';}finally{btn.disabled=false;btn.innerHTML='Send my answer 💌 <span>→</span>';}});
+document.getElementById('skipBtn').addEventListener('click',()=>{document.getElementById('skipMessage').hidden=false;});
