@@ -1,72 +1,125 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#fff5f0"><title>Hi, Doctor! 💗</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff8f6">
+<title>Hi Doctor! — sanket.dev</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="ambient a1"></div><div class="ambient a2"></div>
-<main class="app-shell">
-<header class="topbar"><div class="brand-mark">S<span>♥</span></div><div class="brand-copy"><strong>Sanket.dev</strong><small>a tiny corner of the internet</small></div><span class="top-pill">made with 💗</span></header>
+<main class="app">
+  <header class="nav">
+    <div class="wordmark">sanket.dev<span>♡</span></div>
+    <div class="nav-note">a little hello ✨</div>
+  </header>
 
-<section class="screen active" id="welcome">
-<div class="eyebrow">✦ A little something for you</div><h1>Hiii,<br><span class="pink">Doctor!</span> 🩺</h1>
-<p class="lead">I made you a tiny website. Yes, I could've just sent a message… but where's the fun in that? 😌</p>
-<div class="hero-stage">
-<div class="note note-left">hello, you ✨</div>
-<div class="character me-character" role="img" aria-label="Stylized illustration of Sanket wearing glasses and a black jacket"><div class="char-hair"></div><div class="char-face"><i class="eye e1"></i><i class="eye e2"></i><i class="glasses g1"></i><i class="glasses g2"></i><i class="bridge"></i><i class="smile"></i><i class="beard"></i></div><div class="neck"></div><div class="jacket"><i class="tee"></i><i class="jacket-line"></i></div><div class="hand wave">👋</div></div>
-<div class="speech">Hiii Doctor! 👋</div><div class="note note-right">100% handmade<br>0% chill 😅</div><div class="shadow"></div>
-</div>
-<button class="primary" data-next="hello">Okay, I'm listening 👀 <span>→</span></button><p class="tiny">Best enjoyed with sound on, but no sound required ✨</p>
-</section>
+  <!-- 1: Sanket says hi -->
+  <section class="scene active" id="scene-1">
+    <p class="eyebrow">Chapter 1 · A tiny hello</p>
+    <figure class="art"><img src="assets/story-panel-1.jpg" alt="Sanket's character waving hello"></figure>
+    <div class="speech one"><b>👨🏻‍💻 SANKET</b>Hiii Doctor! 👋❤️</div>
+    <p class="caption">I made a tiny website instead of sending a boring “hey”. 😌</p>
+    <button class="primary" data-next="scene-2">Say hi back <span>→</span></button>
+    <div class="progress"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+  </section>
 
-<section class="screen" id="hello">
-<div class="eyebrow">Plot twist: you showed up 💫</div><h2>And then… <span class="pink">you arrived.</span></h2><p class="lead">Suddenly, this little corner got a lot cuter.</p>
-<div class="meet-stage">
-<div class="person"><div class="character mini me-character"><div class="char-hair"></div><div class="char-face"><i class="eye e1"></i><i class="eye e2"></i><i class="glasses g1"></i><i class="glasses g2"></i><i class="bridge"></i><i class="smile"></i><i class="beard"></i></div><div class="neck"></div><div class="jacket"><i class="tee"></i><i class="jacket-line"></i></div></div><span>Sanket</span></div>
-<div class="handshake">🤝<small>nice to meet you!</small></div>
-<div class="person her-enter"><div class="character mini her-character"><div class="long-hair"></div><div class="char-face"><i class="eye e1"></i><i class="eye e2"></i><i class="smile"></i><i class="bindi"></i></div><i class="earring left">✦</i><i class="earring right">✦</i><div class="neck"></div><div class="saree"><i class="saree-fold"></i><i class="saree-edge"></i></div></div><span>Doctor 💚</span></div><div class="her-speech">Hi! 😊</div><div class="heart">♡</div>
-</div>
-<div class="soft-card"><span>💬</span><p><strong>My opening line?</strong><br>I'm much smoother in code than in real life. Please be patient. 😂</p></div>
-<button class="primary" data-next="cafe">Continue the story <span>→</span></button>
-</section>
+  <!-- 2: She says hi -->
+  <section class="scene" id="scene-2">
+    <p class="eyebrow">Chapter 2 · Your turn</p>
+    <figure class="art"><img src="assets/story-panel-2.jpg" alt="The doctor character waving hello"></figure>
+    <div class="speech two"><b>👩🏻‍⚕️ DOCTOR</b>Hiii! 😊 So… you really made a whole website just to say hi?</div>
+    <div class="speech one"><b>👨🏻‍💻 SANKET</b>Obviously. A normal “hey” didn’t feel creative enough. 😂</div>
+    <button class="primary" data-next="scene-3">Okay, let's talk <span>→</span></button>
+    <button class="back" data-prev="scene-1">← Back</button>
+    <div class="progress"><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  </section>
 
-<section class="screen" id="cafe">
-<div class="eyebrow">Chapter 02 · Café conversations ☕</div><h2>Tell me about <span class="pink">you.</span></h2><p class="lead">Here's what I remember about the lovely human behind the stethoscope…</p>
-<div class="cafe-scene"><div class="window">☀️</div><div class="cafe-people"><div class="cafe-avatar her-cafe">👩🏻‍⚕️</div><div class="cafe-avatar me-cafe">👨🏻‍💻</div></div><div class="table"></div><div class="cups">☕　　　　 ☕</div><div class="caption">coffee + conversations = a good start</div></div>
-<div class="interest-grid"><article><span>🍟</span><strong>Fries & biryani</strong><small>the important food groups</small></article><article><span>🎨</span><strong>Art & writing</strong><small>a creative soul</small></article><article><span>🩺</span><strong>MBBS life</strong><small>smart and hardworking</small></article><article><span>🚗</span><strong>Learning to drive</strong><small>future road-trip energy</small></article></div>
-<div class="soft-card"><span>🧑🏻‍💻</span><p><strong>And me?</strong><br>I love travelling, exploring new places, and building things with technology. Sometimes I build websites instead of just saying what I mean. Case in point: this one. 😅</p></div>
-<div class="green-card"><span>💚</span><p><strong>Green flags matter.</strong><br>Clear communication, emotional intelligence, and small thoughtful gestures. No disappearing acts—unless the Wi-Fi disappears.</p></div>
-<button class="primary" data-next="question">I have one important question… <span>→</span></button>
-</section>
+  <!-- 3: Her interests -->
+  <section class="scene" id="scene-3">
+    <p class="eyebrow">Chapter 3 · Your side</p>
+    <h2>First, tell me about you 💗</h2>
+    <figure class="art"><img src="assets/story-panel-4.jpg" alt="The doctor and Sanket chatting at the café"></figure>
+    <div class="speech two"><b>👩🏻‍⚕️ DOCTOR</b>I’m into art, writing, coffee, and good food. Fries and biryani are always a yes. 🍟🍛</div>
+    <div class="chips"><span>🎨 Art</span><span>✍️ Writing</span><span>☕ Coffee</span><span>🚗 Learning to drive</span><span>🍟 Fries</span><span>🍛 Biryani</span></div>
+    <button class="primary" data-next="scene-4">Your turn, Sanket →</button>
+    <button class="back" data-prev="scene-2">← Back</button>
+    <div class="progress"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+  </section>
 
-<section class="screen" id="question">
-<div class="eyebrow">The very important food proposal 🍟</div><div class="food-art"><span>🍟</span><span>🍛</span><i>💗</i></div>
-<h2>Are you ready for<br><span class="pink">fries & biryani?</span></h2><p class="lead">Good food, zero pressure, and a chance to see if the conversation is as good offline. 😊</p>
-<div class="choices"><button class="primary" id="yesBtn">Yes, let's do it! 💗 <span>→</span></button><button class="secondary" id="thinkBtn">Need to think… 🤔</button></div>
-<div class="reaction" id="reaction" hidden aria-live="polite"></div><div class="dramatic" id="dramatic" hidden><div>😵‍💫</div><strong>Doctor, I need a doctor…</strong><p>Six “Need to think…” clicks. My dramatic little heart couldn't handle the suspense. 💔😂</p><button class="secondary" id="reviveBtn">Revive him? 🩹</button></div>
-<p class="tiny">P.S. Biryani is a serious commitment. I respect that. 😌</p>
-</section>
+  <!-- 4: His interests -->
+  <section class="scene" id="scene-4">
+    <p class="eyebrow">Chapter 4 · My side</p>
+    <h2>Now, a little about me 😎</h2>
+    <figure class="art"><img src="assets/story-panel-3.jpg" alt="Sanket and the doctor meeting in a café"></figure>
+    <div class="speech one"><b>👨🏻‍💻 SANKET · AI ENGINEER</b>I’m into travel, technology and building things. I love discovering new places, good music, and conversations that don’t feel forced. ✈️🤖</div>
+    <div class="speech two"><b>👩🏻‍⚕️ DOCTOR</b>Okay, AI Engineer… what’s your most important food opinion? 👀</div>
+    <button class="primary" data-next="scene-5">I think you can guess… <span>→</span></button>
+    <button class="back" data-prev="scene-3">← Back</button>
+    <div class="progress"><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
+  </section>
 
-<section class="screen" id="connect">
-<div class="success">💗 ✨ 💗</div><div class="eyebrow">She said yes! 🥹</div><h2>Okay, one tiny<br><span class="pink">question, Doctor…</span></h2>
-<p class="lead">Since we agree on fries, biryani and good conversations… may I have your Instagram or phone number?</p>
-<div class="consent"><span>📱</span><strong>Only share what you're comfortable sharing. ❤️</strong><small>Your details will be submitted only when you tap the button below.</small></div>
-<form id="answerForm">
-<label for="contactChoice">What would you prefer to share?</label>
-<div class="radio-row"><label><input type="radio" name="contactChoice" value="Instagram" checked> Instagram</label><label><input type="radio" name="contactChoice" value="Phone number"> Phone number</label><label><input type="radio" name="contactChoice" value="Neither yet"> Not yet</label></div>
-<label for="contactValue" id="contactLabel">Instagram handle (optional)</label>
-<input id="contactValue" name="contactValue" type="text" maxlength="100" autocomplete="off" placeholder="@yourhandle">
-<label for="note">Anything you'd like to say? (optional)</label><textarea id="note" name="note" maxlength="500" rows="3" placeholder="A tiny message…"></textarea>
-<label class="consent-check"><input type="checkbox" id="consentCheck" required> I’m comfortable sharing the details I entered above with Sanket.</label>
-<button class="primary" type="submit" id="submitBtn">Send my answer 💌 <span>→</span></button>
-<p class="form-help" id="formStatus" aria-live="polite">This form needs a private form endpoint to be configured before it can send anything.</p>
-</form>
-<button class="text-button" id="skipBtn">I'll share when I'm ready 😊</button>
-<div class="reaction" id="skipMessage" hidden>No pressure at all. 😊 Thanks for checking out my little website, Doctor. Hope it made you smile. 🌷</div>
-<p class="tiny">You can leave the contact field blank or choose “Not yet”.</p>
-</section>
-<footer class="footer"><span>made with ☕, code & a tiny bit of courage</span><span id="progress">01 / 05</span></footer>
-</main><script src="script.js"></script>
-</body></html>
+  <!-- 5: More conversation -->
+  <section class="scene" id="scene-5">
+    <p class="eyebrow">Chapter 5 · Important research</p>
+    <h2>We might have a shared priority 😂</h2>
+    <figure class="art"><img src="assets/cafe-shared-food.jpg" alt="The two characters sharing biryani and fries at a warm café"></figure>
+    <div class="speech two"><b>👩🏻‍⚕️ DOCTOR</b>Let me guess… food? 😄</div>
+    <div class="speech one"><b>👨🏻‍💻 SANKET</b>Correct. Especially fries and biryani. We’re already making excellent progress. 😂</div>
+    <p class="caption">Good food. Better conversations. Maybe a little chaos. 💗</p>
+    <button class="primary" data-next="scene-6">Ask the big question 🍟 <span>→</span></button>
+    <button class="back" data-prev="scene-4">← Back</button>
+    <div class="progress"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+  </section>
+
+  <!-- 6: Biryani question -->
+  <section class="scene food-scene" id="scene-6">
+    <p class="eyebrow">Chapter 6 · A very serious question</p>
+    <h2>Are you up for fries<br>and biryani? 🍟🍛</h2>
+    <figure class="art"><img src="assets/fries-biryani-question.jpg" alt="The couple asking about fries and biryani in real life"></figure>
+    <div class="speech one"><b>👨🏻‍💻 SANKET</b>Same food. Better conversations. Let’s see where this goes… ❤️</div>
+    <button class="primary" id="yes-button">Yesss! 😍 <span>♥</span></button>
+    <button class="secondary" id="think-button">Give me a moment… 🤔</button>
+    <p class="reaction" id="reaction" aria-live="polite"></p>
+    <div class="progress"><i></i><i></i><i></i><i></i><i></i><i class="on"></i></div>
+  </section>
+
+  <!-- 7: Happy response scene -->
+  <section class="scene" id="scene-7">
+    <p class="eyebrow">Chapter 7 · Well, this got exciting 💗</p>
+    <figure class="art celebration-art"><img src="assets/meet-soon-celebration.jpg" alt="The couple celebrating with the message We'll meet soon then"></figure>
+    <p class="caption">I’m smiling already. 🥹❤️</p>
+    <button class="primary" data-next="scene-contact">One last little thing <span>→</span></button>
+    <button class="back" data-prev="scene-6">← Back</button>
+    <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i></div>
+  </section>
+
+  <!-- Optional contact follow-up -->
+  <section class="scene" id="scene-contact">
+    <p class="eyebrow">One last little question 💌</p>
+    <h2>Keep the conversation going?</h2>
+    <figure class="art contact-art"><img src="assets/cafe-shared-food.jpg" alt="The two characters smiling together over café food"></figure>
+    <p class="body-copy">If you're comfortable, you can share your Instagram or phone number. “Not yet” is completely okay, too. 💗</p>
+    <form id="contact-form">
+      <div class="choices">
+        <label><input type="radio" name="contactType" value="Instagram" checked><span>Instagram</span></label>
+        <label><input type="radio" name="contactType" value="Phone number"><span>Phone number</span></label>
+        <label><input type="radio" name="contactType" value="Not yet"><span>Not yet 😊</span></label>
+      </div>
+      <label class="field-label" for="contact">Optional contact</label>
+      <input id="contact" name="contact" type="text" placeholder="Your Instagram ID (e.g. @yourname)" autocomplete="off">
+      <label class="field-label" for="message">A little message (optional)</label>
+      <textarea id="message" name="message" rows="2" placeholder="Anything you'd like to say…"></textarea>
+      <label class="consent"><input type="checkbox" id="consent"><span>I'm comfortable sharing the details I entered.</span></label>
+      <button class="primary" type="submit">Send my answer <span>♡</span></button>
+      <p class="privacy">No pressure at all. The fries will survive either way. 🍟</p>
+      <p class="form-status" id="form-status" aria-live="polite"></p>
+    </form>
+    <button class="back" data-prev="scene-6">← Back</button>
+  </section>
+  <footer>Made with a little code and a little courage 💗</footer>
+</main>
+<script>window.FORM_ENDPOINT = "https://formspree.io/f/moejgpkd";</script>
+<script src="script.js"></script>
+</body>
+</html>

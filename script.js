@@ -1,13 +1,68 @@
-const screens=[...document.querySelectorAll('.screen')];const progress=document.getElementById('progress');let thinkCount=0;
-function showScreen(id){screens.forEach((s,i)=>{const active=s.id===id;s.classList.toggle('active',active);s.setAttribute('aria-hidden',String(!active));if(active)progress.textContent=`${String(i+1).padStart(2,'0')} / ${String(screens.length).padStart(2,'0')}`});window.scrollTo({top:0,behavior:'smooth'});}
-document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.next)));
-const reactions=['Why the thinking face? 🥺 Did the fries not excite you? 🍟💕','Are you sure? 👀 I was already mentally ordering biryani… 😂','Hmm… still thinking? 🤔 Should I improve my presentation? 😎','Okay okay, take your time… ⏳ But fries get cold, you know? 🍟😂','Five times?! 😳 You’re making me nervous now… 💗 Last chance? 🥺'];
-const thinkBtn=document.getElementById('thinkBtn'),reaction=document.getElementById('reaction'),dramatic=document.getElementById('dramatic');
-thinkBtn.addEventListener('click',()=>{thinkCount++;if(thinkCount<6){reaction.hidden=false;reaction.textContent=reactions[thinkCount-1];thinkBtn.textContent=thinkCount===5?'One more click… 😳':`Still thinking… (${thinkCount}/6) 🤔`;}else{reaction.hidden=true;dramatic.hidden=false;thinkBtn.hidden=true;}});
-document.getElementById('reviveBtn').addEventListener('click',()=>{thinkCount=0;dramatic.hidden=true;thinkBtn.hidden=false;thinkBtn.textContent='Need to think… 🤔';reaction.hidden=false;reaction.textContent='He has been revived. 🩹 The biryani plan is back on the table… maybe? 😌';});
-document.getElementById('yesBtn').addEventListener('click',()=>showScreen('connect'));
-const form=document.getElementById('answerForm'),choiceInputs=[...document.querySelectorAll('input[name="contactChoice"]')],contactLabel=document.getElementById('contactLabel'),contactValue=document.getElementById('contactValue'),formStatus=document.getElementById('formStatus');
-function updateContactField(){const selected=choiceInputs.find(i=>i.checked).value;if(selected==='Instagram'){contactLabel.textContent='Instagram handle (optional)';contactValue.placeholder='@yourhandle';contactValue.type='text';contactValue.autocomplete='off';}else if(selected==='Phone number'){contactLabel.textContent='Phone number (optional)';contactValue.placeholder='+91 98765 43210';contactValue.type='tel';contactValue.autocomplete='tel';}else{contactLabel.textContent='Contact details (optional)';contactValue.placeholder='You can leave this blank';contactValue.type='text';contactValue.autocomplete='off';}}
-choiceInputs.forEach(i=>i.addEventListener('change',updateContactField));
-form.addEventListener('submit',async e=>{e.preventDefault();const endpoint=window.FORM_ENDPOINT||'';if(!endpoint||endpoint.includes('YOUR_FORM_ID')){formStatus.textContent='Not connected yet: set up your private form endpoint in script.js before publishing. No answer has been sent.';formStatus.style.color='#b04461';return;}const data=Object.fromEntries(new FormData(form).entries());const payload={...data,submittedAt:new Date().toISOString(),source:'Sanket.dev'};const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='Sending… 💌';try{const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});if(!response.ok)throw new Error('submit failed');formStatus.textContent='Answer sent. Thank you for sharing! 💗';formStatus.style.color='#34764a';form.reset();updateContactField();}catch(err){formStatus.textContent='Sorry, that did not send. Please try again or tell Sanket directly. No details were confirmed as submitted.';formStatus.style.color='#b04461';}finally{btn.disabled=false;btn.innerHTML='Send my answer 💌 <span>→</span>';}});
-document.getElementById('skipBtn').addEventListener('click',()=>{document.getElementById('skipMessage').hidden=false;});
+const scenes=[...document.querySelectorAll('.scene')];
+function showScene(id){scenes.forEach(s=>s.classList.toggle('active',s.id===id));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showScene(b.dataset.next)));
+document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',()=>showScene(b.dataset.prev)));
+const reactions=[
+'Still thinking? 🥺 I thought fries were a convincing argument. 🍟',
+'Are you sure? 👀 I was already mentally ordering biryani… 😂',
+'Hmm… should I prepare a presentation to convince you? 😎',
+'Take your time… but the fries might not wait forever. 🍟😂',
+'Five times?! 😳 I’m getting nervous now… last chance? 🥺💗'
+];
+let thinkCount=0;const thinkButton=document.getElementById('think-button');const reaction=document.getElementById('reaction');
+thinkButton.addEventListener('click',()=>{
+ if(thinkButton.dataset.revive==='true'){thinkCount=0;thinkButton.dataset.revive='false';thinkButton.textContent='Give me a moment… 🤔';reaction.textContent='I’m back! 😅 Your turn, Doctor.';return;}
+ thinkCount++;
+ if(thinkCount>=5){reaction.textContent='That’s it… 💔 *dramatically faints* 😵‍💫';thinkButton.textContent='Revive me please! 🥹';thinkButton.dataset.revive='true';}
+ else reaction.textContent=reactions[thinkCount-1];
+});
+document.getElementById('yes-button').addEventListener('click',()=>showScene('scene-contact'));
+const contactInput=document.getElementById('contact');
+function updateContactField(){const val=document.querySelector('input[name="contactType"]:checked').value;contactInput.disabled=val==='Not yet';contactInput.value='';contactInput.type=val==='Phone number'?'tel':'text';contactInput.placeholder=val==='Instagram'?'Your Instagram ID (e.g. @yourname)':val==='Phone number'?'Your phone number (optional)':'No contact needed 💗';}
+document.querySelectorAll('input[name="contactType"]').forEach(el=>el.addEventListener('change',updateContactField));updateContactField();
+document.getElementById('contact-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const status = document.getElementById('form-status');
+  const choice = document.querySelector('input[name="contactType"]:checked').value;
+  const consent = document.getElementById('consent').checked;
+
+  if (choice !== 'Not yet' && !consent) {
+    status.textContent = 'Please tick the consent box if you want to share your contact details.';
+    return;
+  }
+
+  const endpoint = 'https://formspree.io/f/moejgpkd';
+  const payload = {
+    'Contact choice': choice,
+    'Contact detail': choice === 'Not yet' ? '' : contactInput.value.trim(),
+    'Message': document.getElementById('message').value.trim(),
+    'Consent': consent ? 'Yes' : 'No',
+    '_subject': 'New answer from the sanket.dev website'
+  };
+
+  status.textContent = 'Sending your answer…';
+  const submitButton = e.target.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      status.textContent = 'Thank you for answering 💗 Your response has been sent!';
+      e.target.reset();
+      updateContactField();
+    } else {
+      let details = '';
+      try { details = (await response.json()).errors?.map(x => x.message).join(' ') || ''; } catch {}
+      status.textContent = details || 'Could not send yet. Check that your Formspree form is activated, then try again.';
+    }
+  } catch {
+    status.textContent = 'Could not connect right now. Please check your connection and try again.';
+  } finally {
+    submitButton.disabled = false;
+  }
+});
